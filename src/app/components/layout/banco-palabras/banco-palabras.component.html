@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="card col-12">
+        <div class="card-body">
+            <h5 class="card-title">Cuantas {{nombreTipoDeJuego}} tiene la palabra: {{bpalabras[indicePalabraAUsar] }}    {{mensajeEquivocacion}}
+            </h5>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mx-auto my-5" *ngFor="let opcion of opcionesAElegir">
+        <div class="card">
+            <div class="card-body">
+                <a class="btn btn-primary" (click)="comprobarOpcionCorrecta(opcion)">{{opcion}}</a>
+            </div>
+        </div>
+    </div>
+</div>

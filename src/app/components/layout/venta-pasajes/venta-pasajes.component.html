@@ -1,0 +1,67 @@
+<p>venta-pasajes works!</p>
+<div class="contain">
+    <form>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="validationDefault01">DNI Pasajero</label>
+                <input type="number" class="form-control" [(ngModel)]="dniPasajero" value="Mark"
+                    required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationDefault02">Precio de pasaje</label>
+                <input type="number" class="form-control" name="precioPasaje" [(ngModel)]="precioPasaje" value="Otto"
+                    required>
+            </div>
+            <div>
+                <label>Categoria:</label>
+                <select class="form-select" aria-label="Default select example" (change)="obtenerDescuento(precioPasaje,categoriaPasaje)">
+                    <option for="categoria" name="categoria" (change)="obtenerDescuento(precioPasaje,categoriaPasaje)" [(ngModel)]="categoriaPasaje" value="m">Niño</option>
+                    <option for="categoria" name="categoria" (change)="obtenerDescuento(precioPasaje,categoriaPasaje)" [(ngModel)]="categoriaPasaje" value="a">Adulto</option>
+                    <option for="categoria" name="categoria" (change)="obtenerDescuento(precioPasaje,categoriaPasaje)" [(ngModel)]="categoriaPasaje" value="j">Jubilado</option>
+                </select>
+            </div>
+            <div>
+                <label for="">Precio estimado: {{obtenerDescuento(precioPasaje,categoriaPasaje)}}</label>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" (click)="guardarPasaje()" >Guardar Pasaje</button>
+    </form>
+
+    <table class="table" >
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pasaje of serviceRegistro.obtenerPasajes">
+            <th scope="row">1</th>
+            <td>{{pasaje.dniPasajero}}</td>
+            <td>{{pasaje.categoriaPasaje}}</td>
+            <td>{{pasaje.precioPasaje}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table" >
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Cantidad de vendidos</th>
+            <th scope="col">Precio Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let resumen of serviceRegistro.obtenerResumen">
+            <th scope="row">1</th>
+            <td>{{resumen.categoria}}</td>
+            <td>{{resumen.cantidadPasajes}}</td>
+            <td>{{resumen.precioTotal}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
