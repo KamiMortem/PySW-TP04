@@ -35,7 +35,7 @@ export class BancoPalabrasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("iniciado...")
+    //console.log("iniciado...")
     this.palabraRandom()
     this.obtenerOpcionTipoDeJuego()
     this.obtenerOpcionesRandom()

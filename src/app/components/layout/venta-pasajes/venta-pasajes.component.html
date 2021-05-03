@@ -1,4 +1,3 @@
-<p>venta-pasajes works!</p>
 <div class="contain">
   <form>
     <div class="form-row">
@@ -18,7 +17,7 @@
         </select>
       </div>
       <div>
-        <label for="">Precio estimado: {{serviceRegistro.obtenerDescuento(precioPasaje,categoriaPasaje)}}</label>
+        <label for="" *ngIf="precioPasaje>0 && categoriaPasaje!=''">Precio Total: ${{serviceRegistro.obtenerDescuento(precioPasaje,categoriaPasaje)}}</label>
       </div>
     </div>
     <button class="btn btn-primary" type="submit" (click)="guardarPasaje()">Guardar Pasaje</button>
@@ -32,14 +31,16 @@
         <th scope="col">DNI</th>
         <th scope="col">Categoria</th>
         <th scope="col">Precio</th>
+        <th scope="col">Fecha</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let pasaje of todosPasajes">
-        <th scope="row">{{todosPasajes.indexOf(pasaje)}}</th>
+        <th scope="row">{{todosPasajes.indexOf(pasaje)+1}}</th>
         <td>{{pasaje.dniPasajero}}</td>
         <td>{{pasaje.categoriaPasaje}}</td>
-        <td>{{pasaje.precioPasaje}}</td>
+        <td>{{pasaje.precioPasaje | currency:'AR'}}</td>
+        <th>{{pasaje.fechaCompra | date: 'short'}}</th>
       </tr>
     </tbody>
   </table>
@@ -56,10 +57,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let resumen of resumenPasajes">
-        <th scope="row">{{resumenPasajes.indexOf(resumen)}}</th>
+        <th scope="row">{{resumenPasajes.indexOf(resumen)+1}}</th>
         <td>{{resumen.categoria}}</td>
         <td>{{resumen.cantidadPasajes}}</td>
-        <td>{{resumen.precioTotal}}</td>
+        <td>{{resumen.precioTotal | currency:'AR'}}</td>
       </tr>
     </tbody>
   </table>

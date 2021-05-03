@@ -13,7 +13,7 @@ export class VentaPasajesComponent implements OnInit {
   serviceRegistro: ServiceRegistrarVentaService
   dniPasajero: number = 0
   precioPasaje: number = 0
-  categoriaPasaje: string
+  categoriaPasaje: string = ""
   fechaCompra: Date
   precioDescuento: number = 0
   resumenPasajes: Array<any>
@@ -24,10 +24,10 @@ export class VentaPasajesComponent implements OnInit {
     {nombre:"Adulto", categoria:"a"},
   ]
   constructor() {
-    console.log("Entrando a constructor venta-pasajes...")
     this.resumenPasajes = new Array()
     this.serviceRegistro = new ServiceRegistrarVentaService()
     this.todosPasajes= new Array()
+    this.resumenPasajes= this.serviceRegistro.obtenerResumen()
   }
 
   ngOnInit(): void {
@@ -35,7 +35,6 @@ export class VentaPasajesComponent implements OnInit {
   }
 
   guardarPasaje() {
-    console.log("Entrando a guardar...")
     this.pasaje = new Pasaje(this.dniPasajero, this.precioPasaje, this.categoriaPasaje)
     console.log("Guardando pasaje..." + this.pasaje.categoriaPasaje + " " + this.pasaje.dniPasajero + " " + this.pasaje.precioPasaje)
     this.serviceRegistro.guardarPasaje(this.pasaje)
