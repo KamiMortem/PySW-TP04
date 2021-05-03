@@ -1,5 +1,9 @@
 <div class="container">
   <app-header></app-header>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
+  <div class="container" style="min-height: calc(100vh - 100px - 100px);">
+    <div class="main">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
+<app-footer></app-footer>

@@ -1,5 +1,5 @@
 <div class="contain">
-  <form>
+  <form class="">
     <div class="form-row">
       <div class="col-md-4 mb-3">
         <label for="validationDefault01">DNI Pasajero</label>
@@ -9,59 +9,64 @@
         <label for="validationDefault02">Precio de pasaje</label>
         <input type="number" class="form-control" name="precioPasaje" [(ngModel)]="precioPasaje" value="Otto" required>
       </div>
-      <div>
+      <div class="col-md-4 mb-3">
         <label>Categoria:</label>
-        <select class="form-select" name="categoria" [(ngModel)]="categoriaPasaje"
-        (change)="serviceRegistro.obtenerDescuento(precioPasaje,categoriaPasaje)">
+        <select class="form-select " name="categoria" [(ngModel)]="categoriaPasaje"
+          (change)="serviceRegistro.obtenerDescuento(precioPasaje,categoriaPasaje)">
           <option [value]="categoria.categoria" *ngFor="let categoria of categorias">{{categoria.nombre}}</option>
         </select>
       </div>
       <div>
-        <label for="" *ngIf="precioPasaje>0 && categoriaPasaje!=''">Precio Total: ${{serviceRegistro.obtenerDescuento(precioPasaje,categoriaPasaje)}}</label>
+        <label for="" *ngIf="precioPasaje>0 && categoriaPasaje!=''">Precio Total:
+          ${{serviceRegistro.obtenerDescuento(precioPasaje,categoriaPasaje)}}</label>
       </div>
     </div>
     <button class="btn btn-primary" type="submit" (click)="guardarPasaje()">Guardar Pasaje</button>
   </form>
 
-  <h2>Lista Completa de pasajes:</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">DNI</th>
-        <th scope="col">Categoria</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Fecha</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pasaje of todosPasajes">
-        <th scope="row">{{todosPasajes.indexOf(pasaje)+1}}</th>
-        <td>{{pasaje.dniPasajero}}</td>
-        <td>{{pasaje.categoriaPasaje}}</td>
-        <td>{{pasaje.precioPasaje | currency:'AR'}}</td>
-        <th>{{pasaje.fechaCompra | date: 'short'}}</th>
-      </tr>
-    </tbody>
-  </table>
+  <h2 class="mt-5 d-flex justify-content-center">Lista completa de pasajes</h2>
+  <div class="table-responsive-md">
+    <table class="table ">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">DNI</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pasaje of todosPasajes">
+          <th scope="row">{{todosPasajes.indexOf(pasaje)+1}}</th>
+          <td>{{pasaje.dniPasajero}}</td>
+          <td>{{pasaje.categoriaPasaje}}</td>
+          <td>{{pasaje.precioPasaje | currency:'AR'}}</td>
+          <th>{{pasaje.fechaCompra | date: 'short'}}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  <h2>Resumen de ventas:</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Categoria</th>
-        <th scope="col">Cantidad de vendidos</th>
-        <th scope="col">Precio Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let resumen of resumenPasajes">
-        <th scope="row">{{resumenPasajes.indexOf(resumen)+1}}</th>
-        <td>{{resumen.categoria}}</td>
-        <td>{{resumen.cantidadPasajes}}</td>
-        <td>{{resumen.precioTotal | currency:'AR'}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <h2 class="mt-6 d-flex justify-content-center">Resumen de ventas</h2>
+  <div class="table-responsive-md">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Cantidad de vendidos</th>
+          <th scope="col">Precio Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resumen of resumenPasajes">
+          <th scope="row">{{resumenPasajes.indexOf(resumen)+1}}</th>
+          <td>{{resumen.categoria}}</td>
+          <td>{{resumen.cantidadPasajes}}</td>
+          <td>{{resumen.precioTotal | currency:'AR'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
