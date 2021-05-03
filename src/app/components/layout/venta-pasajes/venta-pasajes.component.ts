@@ -11,33 +11,35 @@ export class VentaPasajesComponent implements OnInit {
 
   pasaje: Pasaje
   serviceRegistro: ServiceRegistrarVentaService
-  dniPasajero: number =0
+  dniPasajero: number = 0
   precioPasaje: number = 0
-  categoriaPasaje: string = ""
+  categoriaPasaje: string
   fechaCompra: Date
-  precioDescuento:number=0
+  precioDescuento: number = 0
+  resumenPasajes: Array<any>
+  todosPasajes: Array<any>
+  categorias: Array<any>= [
+    {nombre:"niño", categoria:"m"},
+    {nombre:"Jubilado", categoria:"j"},
+    {nombre:"Adulto", categoria:"a"},
+  ]
   constructor() {
-    
+    console.log("Entrando a constructor venta-pasajes...")
+    this.resumenPasajes = new Array()
+    this.serviceRegistro = new ServiceRegistrarVentaService()
+    this.todosPasajes= new Array()
   }
 
   ngOnInit(): void {
-    this.serviceRegistro= new ServiceRegistrarVentaService()
+
   }
 
   guardarPasaje() {
-    this.pasaje = new Pasaje(this.dniPasajero,this.precioPasaje,this.categoriaPasaje)
+    console.log("Entrando a guardar...")
+    this.pasaje = new Pasaje(this.dniPasajero, this.precioPasaje, this.categoriaPasaje)
+    console.log("Guardando pasaje..." + this.pasaje.categoriaPasaje + " " + this.pasaje.dniPasajero + " " + this.pasaje.precioPasaje)
     this.serviceRegistro.guardarPasaje(this.pasaje)
-  }
-
-  obtenerDescuento(precioPasaje: number, categoriaPasaje: string):number {
-    this.precioDescuento = precioPasaje
-    if (categoriaPasaje == "m") {
-      this.precioDescuento *= 0.25
-    } else {
-      if (categoriaPasaje == "j") {
-        this.precioDescuento *= 0.5
-      }
-    }
-    return this.precioDescuento
+    this.resumenPasajes= this.serviceRegistro.obtenerResumen()
+    this.todosPasajes= this.serviceRegistro.obtenerPasajes()
   }
 }

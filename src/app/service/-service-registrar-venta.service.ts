@@ -9,10 +9,12 @@ export class ServiceRegistrarVentaService {
   private pasaje: Pasaje
   private precioDescuento: number = 0
   private pasajes: Array<Pasaje>
-
-  constructor() { }
+  constructor() { 
+    this.pasajes = new Array<Pasaje>()
+  }
 
   guardarPasaje(pasaje: Pasaje): void {
+    this.pasaje=pasaje
     this.pasaje.fechaCompra = new Date()
     if (this.precioDescuento == 0) {
       this.precioDescuento = this.pasaje.precioPasaje
@@ -32,6 +34,7 @@ export class ServiceRegistrarVentaService {
     }
     return this.precioDescuento
   }
+
 
   obtenerResumen():Array<any> {
     let resumen: Array<any> = [
